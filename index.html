@@ -4,191 +4,288 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Warneford Consulting — Tools & Portals</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --red: #E8392A;
-      --red-dark: #c42e1f;
-      --red-light: #fdf1f0;
-      --navy: #1a2740;
-      --slate: #475569;
-      --muted: #94a3b8;
-      --border: #e2e8f0;
-      --bg: #f8f9fb;
+      --red: #ef4035;
+      --red-soft: rgba(239,64,53,0.08);
+      --navy: #111827;
+      --body: #374151;
+      --muted: #9ca3af;
+      --border: #e5e7eb;
+      --bg: #f9fafb;
       --white: #ffffff;
-      --radius: 14px;
+      --radius-sm: 10px;
+      --radius: 16px;
+      --radius-lg: 24px;
     }
 
+    html { scroll-behavior: smooth; }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       background: var(--bg);
       color: var(--navy);
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* ── Header ── */
-    header {
+    /* ─────────────────────────────
+       HERO — full-bleed header+hero
+    ───────────────────────────────*/
+    .hero-wrap {
       background: var(--white);
       border-bottom: 1px solid var(--border);
-      padding: 0 48px;
-      height: 72px;
+    }
+
+    /* slim utility bar */
+    .topbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      padding: 14px 56px;
+      border-bottom: 1px solid var(--border);
     }
 
-    .header-brand {
+    .topbar-left {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 500;
     }
 
-    /* Warneford logo mark — SVG recreation of 2×2 red icon */
-    .logo-mark {
-      height: 48px;
-      width: auto;
-      flex-shrink: 0;
+    .topbar-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 0 2px rgba(34,197,94,0.2);
     }
 
-    .header-badge {
+    .topbar-badge {
       font-size: 11px;
       font-weight: 600;
       color: var(--red);
-      background: var(--red-light);
-      padding: 4px 10px;
+      background: var(--red-soft);
+      padding: 3px 10px;
       border-radius: 20px;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.04em;
     }
 
-    /* ── Hero strip ── */
+    /* main hero content */
     .hero {
-      background: linear-gradient(135deg, var(--navy) 0%, #243352 100%);
-      padding: 48px 48px 52px;
-      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 48px 56px 52px;
+      gap: 48px;
     }
 
-    .hero h2 {
-      font-size: 28px;
+    .hero-logo img {
+      height: 96px;
+      width: auto;
+      display: block;
+    }
+
+    .hero-divider {
+      width: 1px;
+      height: 80px;
+      background: var(--border);
+      flex-shrink: 0;
+    }
+
+    .hero-text {
+      flex: 1;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-size: 36px;
       font-weight: 700;
       letter-spacing: -0.03em;
-      line-height: 1.25;
-      margin-bottom: 8px;
+      color: var(--navy);
+      line-height: 1.15;
+      margin-bottom: 12px;
     }
 
-    .hero p {
+    .hero-sub {
       font-size: 15px;
-      color: rgba(255,255,255,0.6);
-      max-width: 520px;
-      line-height: 1.6;
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 480px;
+      font-weight: 400;
     }
 
-    /* ── Main grid ── */
-    main {
-      max-width: 1120px;
+    .hero-stats {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      margin-top: 28px;
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .stat-num {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .stat-divider {
+      width: 1px;
+      height: 32px;
+      background: var(--border);
+    }
+
+    /* ─────────────────────────────
+       SECTION LABEL
+    ───────────────────────────────*/
+    .section-wrap {
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 44px 48px 64px;
+      padding: 48px 56px 72px;
     }
 
     .section-header {
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin-bottom: 24px;
+      gap: 16px;
+      margin-bottom: 28px;
     }
 
     .section-label {
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.09em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--muted);
+      white-space: nowrap;
     }
 
-    .section-rule {
+    .section-line {
       flex: 1;
       height: 1px;
       background: var(--border);
     }
 
+    /* ─────────────────────────────
+       GRID
+    ───────────────────────────────*/
     .grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+      gap: 20px;
     }
 
-    /* ── Tile ── */
+    /* ─────────────────────────────
+       TILE
+    ───────────────────────────────*/
     .tile {
       background: var(--white);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 28px;
+      padding: 32px;
       text-decoration: none;
       color: inherit;
       display: flex;
       flex-direction: column;
-      gap: 0;
-      transition: box-shadow 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
       position: relative;
       overflow: hidden;
+      transition:
+        box-shadow 0.22s cubic-bezier(0.4,0,0.2,1),
+        border-color 0.22s ease,
+        transform 0.22s cubic-bezier(0.4,0,0.2,1);
     }
 
-    .tile::before {
+    /* subtle top accent line */
+    .tile::after {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
-      height: 3px;
+      height: 2px;
       background: var(--red);
-      opacity: 0;
-      transition: opacity 0.18s ease;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
     }
 
     .tile:hover {
-      box-shadow: 0 8px 32px rgba(26, 39, 64, 0.10);
-      border-color: #d0d9e8;
-      transform: translateY(-3px);
+      box-shadow:
+        0 2px 4px rgba(0,0,0,0.04),
+        0 12px 40px rgba(17,24,39,0.10),
+        0 2px 8px rgba(17,24,39,0.06);
+      border-color: #d1d5db;
+      transform: translateY(-4px);
     }
 
-    .tile:hover::before {
-      opacity: 1;
-    }
+    .tile:hover::after { transform: scaleX(1); }
 
-    .tile-icon-wrap {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
+    /* icon */
+    .tile-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-sm);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 18px;
+      margin-bottom: 22px;
       flex-shrink: 0;
     }
 
-    .tile-icon-wrap svg { width: 22px; height: 22px; }
+    .tile-icon svg { width: 24px; height: 24px; }
 
+    /* text */
     .tile-name {
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 700;
       color: var(--navy);
-      letter-spacing: -0.01em;
+      letter-spacing: -0.02em;
       line-height: 1.3;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .tile-desc {
-      font-size: 13px;
-      color: var(--slate);
-      line-height: 1.6;
+      font-size: 13.5px;
+      color: var(--body);
+      line-height: 1.65;
       flex: 1;
+      font-weight: 400;
     }
 
-    .tile-footer {
+    /* footer */
+    .tile-foot {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-top: 20px;
-      padding-top: 16px;
+      margin-top: 24px;
+      padding-top: 18px;
       border-top: 1px solid var(--border);
     }
 
@@ -196,96 +293,145 @@
       font-size: 11px;
       font-weight: 600;
       color: var(--muted);
-      letter-spacing: 0.04em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
     }
 
-    .tile-arrow {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: var(--bg);
+    .tile-cta {
       display: flex;
       align-items: center;
-      justify-content: center;
-      transition: background 0.15s ease;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      transition: color 0.15s ease;
     }
 
-    .tile:hover .tile-arrow {
-      background: var(--red);
+    .tile:hover .tile-cta { color: var(--red); }
+
+    .tile-cta svg {
+      width: 14px; height: 14px;
+      stroke: currentColor;
+      transition: transform 0.2s ease;
     }
 
-    .tile:hover .tile-arrow svg { stroke: white; }
+    .tile:hover .tile-cta svg { transform: translateX(3px); }
 
-    .tile-arrow svg { width: 14px; height: 14px; stroke: var(--muted); transition: stroke 0.15s ease; }
+    /* icon backgrounds */
+    .ic-blue   { background: #eff6ff; color: #2563eb; }
+    .ic-green  { background: #f0fdf4; color: #16a34a; }
+    .ic-purple { background: #faf5ff; color: #7c3aed; }
+    .ic-amber  { background: #fffbeb; color: #d97706; }
+    .ic-teal   { background: #f0fdfa; color: #0d9488; }
 
-    /* icon colour themes */
-    .bg-red    { background: #fdf1f0; color: #E8392A; }
-    .bg-blue   { background: #eff6ff; color: #1d4ed8; }
-    .bg-green  { background: #f0fdf4; color: #16a34a; }
-    .bg-amber  { background: #fffbeb; color: #d97706; }
-    .bg-purple { background: #faf5ff; color: #7c3aed; }
-    .bg-teal   { background: #f0fdfa; color: #0d9488; }
+    /* ─────────────────────────────
+       FOOTER
+    ───────────────────────────────*/
+    site-footer {
+      display: block;
+    }
 
-    /* ── Footer ── */
-    footer {
+    .footer-inner {
       border-top: 1px solid var(--border);
-      padding: 24px 48px;
+      padding: 24px 56px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       background: var(--white);
     }
 
-    footer p {
+    .footer-inner p {
       font-size: 12px;
       color: var(--muted);
+      font-weight: 400;
     }
 
-    footer a {
+    .footer-inner a {
       font-size: 12px;
-      color: var(--red);
+      color: var(--muted);
       text-decoration: none;
+      font-weight: 500;
+      transition: color 0.15s;
     }
 
-    footer a:hover { text-decoration: underline; }
+    .footer-inner a:hover { color: var(--red); }
 
-    /* ── Responsive ── */
-    @media (max-width: 900px) {
+    /* ─────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────*/
+    @media (max-width: 1000px) {
       .grid { grid-template-columns: repeat(2, 1fr); }
     }
 
-    @media (max-width: 600px) {
-      header { padding: 0 20px; }
-      .hero { padding: 36px 20px 40px; }
-      .hero h2 { font-size: 22px; }
-      main { padding: 32px 20px 48px; }
+    @media (max-width: 720px) {
+      .topbar { padding: 12px 24px; }
+      .hero { flex-direction: column; align-items: flex-start; padding: 36px 24px 40px; gap: 24px; }
+      .hero-divider { display: none; }
+      .hero-logo img { height: 72px; }
+      .hero-title { font-size: 26px; }
+      .section-wrap { padding: 32px 24px 56px; }
       .grid { grid-template-columns: 1fr; }
-      footer { flex-direction: column; gap: 8px; padding: 20px; }
+      .footer-inner { flex-direction: column; gap: 8px; text-align: center; padding: 20px 24px; }
     }
   </style>
 </head>
 <body>
 
-<!-- ── Header ── -->
-<header>
-  <div class="header-brand">
-    <img class="logo-mark" src="logo.svg" alt="Warneford Consulting">
-  </div>
-  <div class="header-badge">WC Internal</div>
-</header>
+<!-- ══════════════════════════════
+     HERO
+═══════════════════════════════════ -->
+<div class="hero-wrap">
 
-<!-- ── Hero ── -->
-<div class="hero">
-  <h2>Tools &amp; Portals</h2>
-  <p>Your central hub for Warneford Consulting's client-facing portals and internal intelligence tools. Click any tile to open.</p>
+  <!-- utility bar -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-dot"></span>
+      All systems operational
+    </div>
+    <span class="topbar-badge">Internal Access</span>
+  </div>
+
+  <!-- logo + title -->
+  <div class="hero">
+    <div class="hero-logo">
+      <img src="logo-landscape.png" alt="Warneford Consulting">
+    </div>
+
+    <div class="hero-divider"></div>
+
+    <div class="hero-text">
+      <div class="hero-eyebrow">Tools &amp; Portals</div>
+      <h1 class="hero-title">Your central hub</h1>
+      <p class="hero-sub">Access all Warneford Consulting's client portals and internal intelligence tools from one place.</p>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">5</span>
+          <span class="stat-label">Active portals</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">2,089</span>
+          <span class="stat-label">Trusts tracked</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">12yrs</span>
+          <span class="stat-label">CIF data</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
-<!-- ── Grid ── -->
-<main>
+<!-- ══════════════════════════════
+     GRID
+═══════════════════════════════════ -->
+<div class="section-wrap">
+
   <div class="section-header">
     <span class="section-label">All tools</span>
-    <div class="section-rule"></div>
+    <div class="section-line"></div>
     <span class="section-label">5 portals</span>
   </div>
 
@@ -293,29 +439,29 @@
 
     <!-- CIF Project Manager -->
     <a class="tile" href="https://cif-manager.pages.dev" target="_blank" rel="noopener">
-      <div class="tile-icon-wrap bg-blue">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <div class="tile-icon ic-blue">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
           <path d="M9 11l3 3L22 4"/>
           <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
         </svg>
       </div>
       <div class="tile-name">CIF Project Manager</div>
       <div class="tile-desc">Track and manage Condition Improvement Fund project applications across your trust portfolio, from submission through to ESFA decision.</div>
-      <div class="tile-footer">
+      <div class="tile-foot">
         <span class="tile-tag">CIF</span>
-        <div class="tile-arrow">
-          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"/>
-            <polyline points="12 5 19 12 12 19"/>
+        <span class="tile-cta">
+          Open
+          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
           </svg>
-        </div>
+        </span>
       </div>
     </a>
 
     <!-- CIF Evidence Upload -->
     <a class="tile" href="https://cif-evidence-portal.pages.dev" target="_blank" rel="noopener">
-      <div class="tile-icon-wrap bg-green">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <div class="tile-icon ic-green">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
           <polyline points="17 8 12 3 7 8"/>
           <line x1="12" y1="3" x2="12" y2="15"/>
@@ -323,63 +469,63 @@
       </div>
       <div class="tile-name">CIF Evidence Upload</div>
       <div class="tile-desc">Secure document upload portal for academy trusts to submit supporting evidence for CIF applications directly to Warneford Consulting.</div>
-      <div class="tile-footer">
+      <div class="tile-foot">
         <span class="tile-tag">CIF</span>
-        <div class="tile-arrow">
-          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"/>
-            <polyline points="12 5 19 12 12 19"/>
+        <span class="tile-cta">
+          Open
+          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
           </svg>
-        </div>
+        </span>
       </div>
     </a>
 
     <!-- Academy Intelligence Portal -->
     <a class="tile" href="https://academy-trust-intelligence.pages.dev" target="_blank" rel="noopener">
-      <div class="tile-icon-wrap bg-purple">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <div class="tile-icon ic-purple">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="11" cy="11" r="8"/>
           <line x1="21" y1="21" x2="16.65" y2="16.65"/>
         </svg>
       </div>
       <div class="tile-name">Academy Intelligence Portal</div>
       <div class="tile-desc">Comprehensive data on all 2,089 English academy trusts — 12 years of CIF history, SCA allocations, school data, and engagement opportunity scoring.</div>
-      <div class="tile-footer">
+      <div class="tile-foot">
         <span class="tile-tag">Intelligence</span>
-        <div class="tile-arrow">
-          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"/>
-            <polyline points="12 5 19 12 12 19"/>
+        <span class="tile-cta">
+          Open
+          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
           </svg>
-        </div>
+        </span>
       </div>
     </a>
 
     <!-- DEC Finder -->
     <a class="tile" href="https://dec-finder.pages.dev" target="_blank" rel="noopener">
-      <div class="tile-icon-wrap bg-amber">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <div class="tile-icon ic-amber">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
           <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
           <polyline points="9 22 9 12 15 12 15 22"/>
         </svg>
       </div>
       <div class="tile-name">DEC Finder</div>
       <div class="tile-desc">Search and view Display Energy Certificates for public buildings, helping trusts understand their estate's energy performance and compliance position.</div>
-      <div class="tile-footer">
+      <div class="tile-foot">
         <span class="tile-tag">Energy</span>
-        <div class="tile-arrow">
-          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"/>
-            <polyline points="12 5 19 12 12 19"/>
+        <span class="tile-cta">
+          Open
+          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
           </svg>
-        </div>
+        </span>
       </div>
     </a>
 
     <!-- GEMZ Upload Portal -->
     <a class="tile" href="https://gemz-data-portal.pages.dev" target="_blank" rel="noopener">
-      <div class="tile-icon-wrap bg-teal">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <div class="tile-icon ic-teal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
           <ellipse cx="12" cy="5" rx="9" ry="3"/>
           <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
           <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
@@ -387,25 +533,27 @@
       </div>
       <div class="tile-name">GEMZ Upload Portal</div>
       <div class="tile-desc">Upload and manage data files for the GEMZ platform, enabling seamless data ingestion and processing for energy and asset management workflows.</div>
-      <div class="tile-footer">
+      <div class="tile-foot">
         <span class="tile-tag">Data</span>
-        <div class="tile-arrow">
-          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"/>
-            <polyline points="12 5 19 12 12 19"/>
+        <span class="tile-cta">
+          Open
+          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
           </svg>
-        </div>
+        </span>
       </div>
     </a>
 
   </div>
-</main>
+</div>
 
-<!-- ── Footer ── -->
-<footer>
-  <p>&copy; 2026 Warneford Consulting Ltd. For internal use only.</p>
+<!-- ══════════════════════════════
+     FOOTER
+═══════════════════════════════════ -->
+<div class="footer-inner">
+  <p>&copy; 2026 Warneford Consulting Ltd &nbsp;·&nbsp; For authorised internal use only</p>
   <a href="mailto:james@warnefordconsulting.com">james@warnefordconsulting.com</a>
-</footer>
+</div>
 
 </body>
 </html>
