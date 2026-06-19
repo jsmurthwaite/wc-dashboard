@@ -7,250 +7,444 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --red: #E8392A;
+      --red-dark: #c42e1f;
+      --red-light: #fdf1f0;
+      --navy: #1a2740;
+      --slate: #475569;
+      --muted: #94a3b8;
+      --border: #e2e8f0;
+      --bg: #f8f9fb;
+      --white: #ffffff;
+      --radius: 14px;
+    }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #f4f6f9;
-      color: #1a1f2e;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--navy);
       min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
     }
 
+    /* ── Header ── */
     header {
-      background: #fff;
-      border-bottom: 1px solid #e2e8f0;
-      padding: 24px 40px;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 0 48px;
+      height: 72px;
       display: flex;
       align-items: center;
-      gap: 16px;
+      justify-content: space-between;
     }
 
-    .logo {
-      width: 36px;
-      height: 36px;
-      background: #1a3c6e;
-      border-radius: 8px;
+    .header-brand {
       display: flex;
       align-items: center;
-      justify-content: center;
+      gap: 14px;
+    }
+
+    /* Warneford logo mark — SVG recreation of 2×2 red icon */
+    .logo-mark {
+      width: 42px;
+      height: 42px;
       flex-shrink: 0;
     }
 
-    .logo svg { width: 20px; height: 20px; }
+    .brand-text h1 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
 
-    header h1 {
-      font-size: 18px;
+    .brand-text p {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 1px;
+      letter-spacing: 0.01em;
+    }
+
+    .header-badge {
+      font-size: 11px;
       font-weight: 600;
-      color: #1a3c6e;
-      letter-spacing: -0.01em;
+      color: var(--red);
+      background: var(--red-light);
+      padding: 4px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.03em;
     }
 
-    header p {
-      font-size: 13px;
-      color: #64748b;
-      margin-top: 2px;
+    /* ── Hero strip ── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #243352 100%);
+      padding: 48px 48px 52px;
+      color: var(--white);
     }
 
+    .hero h2 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+
+    .hero p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.6);
+      max-width: 520px;
+      line-height: 1.6;
+    }
+
+    /* ── Main grid ── */
     main {
-      max-width: 1100px;
+      max-width: 1120px;
       margin: 0 auto;
-      padding: 48px 40px;
+      padding: 44px 48px 64px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
     }
 
     .section-label {
       font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
+      font-weight: 700;
+      letter-spacing: 0.09em;
       text-transform: uppercase;
-      color: #94a3b8;
-      margin-bottom: 20px;
+      color: var(--muted);
+    }
+
+    .section-rule {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
     }
 
+    /* ── Tile ── */
     .tile {
-      background: #fff;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      padding: 24px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
       text-decoration: none;
       color: inherit;
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      transition: box-shadow 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
-      cursor: pointer;
+      gap: 0;
+      transition: box-shadow 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tile::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--red);
+      opacity: 0;
+      transition: opacity 0.18s ease;
     }
 
     .tile:hover {
-      box-shadow: 0 4px 16px rgba(26, 60, 110, 0.10);
-      border-color: #c7d7ee;
-      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(26, 39, 64, 0.10);
+      border-color: #d0d9e8;
+      transform: translateY(-3px);
     }
 
-    .tile-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+    .tile:hover::before {
+      opacity: 1;
     }
 
-    .tile-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
+    .tile-icon-wrap {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 18px;
       flex-shrink: 0;
     }
 
-    .tile-icon svg { width: 20px; height: 20px; }
+    .tile-icon-wrap svg { width: 22px; height: 22px; }
 
     .tile-name {
       font-size: 15px;
-      font-weight: 600;
-      color: #1a1f2e;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: -0.01em;
       line-height: 1.3;
+      margin-bottom: 8px;
     }
 
     .tile-desc {
       font-size: 13px;
-      color: #64748b;
-      line-height: 1.55;
+      color: var(--slate);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .tile-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .tile-tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
 
     .tile-arrow {
-      margin-top: auto;
-      font-size: 12px;
-      color: #94a3b8;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--bg);
       display: flex;
       align-items: center;
-      gap: 4px;
+      justify-content: center;
+      transition: background 0.15s ease;
     }
 
-    .tile:hover .tile-arrow { color: #1a3c6e; }
+    .tile:hover .tile-arrow {
+      background: var(--red);
+    }
+
+    .tile:hover .tile-arrow svg { stroke: white; }
+
+    .tile-arrow svg { width: 14px; height: 14px; stroke: var(--muted); transition: stroke 0.15s ease; }
 
     /* icon colour themes */
-    .icon-blue   { background: #eff6ff; color: #1d4ed8; }
-    .icon-green  { background: #f0fdf4; color: #16a34a; }
-    .icon-amber  { background: #fffbeb; color: #d97706; }
-    .icon-purple { background: #faf5ff; color: #7c3aed; }
-    .icon-teal   { background: #f0fdfa; color: #0d9488; }
+    .bg-red    { background: #fdf1f0; color: #E8392A; }
+    .bg-blue   { background: #eff6ff; color: #1d4ed8; }
+    .bg-green  { background: #f0fdf4; color: #16a34a; }
+    .bg-amber  { background: #fffbeb; color: #d97706; }
+    .bg-purple { background: #faf5ff; color: #7c3aed; }
+    .bg-teal   { background: #f0fdfa; color: #0d9488; }
 
+    /* ── Footer ── */
     footer {
-      text-align: center;
-      padding: 40px;
+      border-top: 1px solid var(--border);
+      padding: 24px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--white);
+    }
+
+    footer p {
       font-size: 12px;
-      color: #94a3b8;
+      color: var(--muted);
+    }
+
+    footer a {
+      font-size: 12px;
+      color: var(--red);
+      text-decoration: none;
+    }
+
+    footer a:hover { text-decoration: underline; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 600px) {
-      header { padding: 20px; }
-      main { padding: 32px 20px; }
+      header { padding: 0 20px; }
+      .hero { padding: 36px 20px 40px; }
+      .hero h2 { font-size: 22px; }
+      main { padding: 32px 20px 48px; }
       .grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 8px; padding: 20px; }
     }
   </style>
 </head>
 <body>
 
+<!-- ── Header ── -->
 <header>
-  <div class="logo">
-    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="3" y="3" width="7" height="7" rx="1"/>
-      <rect x="14" y="3" width="7" height="7" rx="1"/>
-      <rect x="3" y="14" width="7" height="7" rx="1"/>
-      <rect x="14" y="14" width="7" height="7" rx="1"/>
+  <div class="header-brand">
+    <!-- Warneford logo mark -->
+    <svg class="logo-mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <!-- Top-left: filled red rounded square with asterisk -->
+      <rect x="2" y="2" width="44" height="44" rx="10" fill="#E8392A"/>
+      <line x1="24" y1="11" x2="24" y2="37" stroke="white" stroke-width="5" stroke-linecap="round"/>
+      <line x1="11" y1="24" x2="37" y2="24" stroke="white" stroke-width="5" stroke-linecap="round"/>
+      <line x1="14.5" y1="14.5" x2="33.5" y2="33.5" stroke="white" stroke-width="5" stroke-linecap="round"/>
+      <line x1="33.5" y1="14.5" x2="14.5" y2="33.5" stroke="white" stroke-width="5" stroke-linecap="round"/>
+      <!-- Top-right: outlined rounded square with teardrop -->
+      <rect x="54" y="2" width="44" height="44" rx="10" fill="none" stroke="#E8392A" stroke-width="5"/>
+      <circle cx="76" cy="22" r="10" fill="none" stroke="#E8392A" stroke-width="5"/>
+      <path d="M66 30 Q76 44 86 30" fill="none" stroke="#E8392A" stroke-width="5" stroke-linecap="round"/>
+      <!-- Bottom-left: outlined rounded square with speech bubble D -->
+      <rect x="2" y="54" width="44" height="44" rx="10" fill="none" stroke="#E8392A" stroke-width="5"/>
+      <path d="M18 64 Q10 64 10 74 Q10 84 18 84 L38 84 L38 64 Z" fill="none" stroke="#E8392A" stroke-width="5" stroke-linejoin="round"/>
+      <!-- Bottom-right: filled red rounded square with asterisk -->
+      <rect x="54" y="54" width="44" height="44" rx="10" fill="#E8392A"/>
+      <line x1="76" y1="63" x2="76" y2="89" stroke="white" stroke-width="5" stroke-linecap="round"/>
+      <line x1="63" y1="76" x2="89" y2="76" stroke="white" stroke-width="5" stroke-linecap="round"/>
+      <line x1="66.5" y1="66.5" x2="85.5" y2="85.5" stroke="white" stroke-width="5" stroke-linecap="round"/>
+      <line x1="85.5" y1="66.5" x2="66.5" y2="85.5" stroke="white" stroke-width="5" stroke-linecap="round"/>
     </svg>
+    <div class="brand-text">
+      <h1>Warneford Consulting</h1>
+      <p>Internal tools &amp; client portals</p>
+    </div>
   </div>
-  <div>
-    <h1>Warneford Consulting</h1>
-    <p>Internal tools &amp; client portals</p>
-  </div>
+  <div class="header-badge">WC Internal</div>
 </header>
 
+<!-- ── Hero ── -->
+<div class="hero">
+  <h2>Tools &amp; Portals</h2>
+  <p>Your central hub for Warneford Consulting's client-facing portals and internal intelligence tools. Click any tile to open.</p>
+</div>
+
+<!-- ── Grid ── -->
 <main>
-  <div class="section-label">All tools</div>
+  <div class="section-header">
+    <span class="section-label">All tools</span>
+    <div class="section-rule"></div>
+    <span class="section-label">5 portals</span>
+  </div>
+
   <div class="grid">
 
+    <!-- CIF Project Manager -->
     <a class="tile" href="https://cif-manager.pages.dev" target="_blank" rel="noopener">
-      <div class="tile-header">
-        <div class="tile-icon icon-blue">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 11l3 3L22 4"/>
-            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+      <div class="tile-icon-wrap bg-blue">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 11l3 3L22 4"/>
+          <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+        </svg>
+      </div>
+      <div class="tile-name">CIF Project Manager</div>
+      <div class="tile-desc">Track and manage Condition Improvement Fund project applications across your trust portfolio, from submission through to ESFA decision.</div>
+      <div class="tile-footer">
+        <span class="tile-tag">CIF</span>
+        <div class="tile-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
           </svg>
         </div>
-        <div class="tile-name">CIF Project Manager</div>
       </div>
-      <div class="tile-desc">Track and manage Condition Improvement Fund project applications across your trust portfolio, from submission through to decision.</div>
-      <div class="tile-arrow">Open portal ›</div>
     </a>
 
+    <!-- CIF Evidence Upload -->
     <a class="tile" href="https://cif-evidence-portal.pages.dev" target="_blank" rel="noopener">
-      <div class="tile-header">
-        <div class="tile-icon icon-green">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
-            <polyline points="17 8 12 3 7 8"/>
-            <line x1="12" y1="3" x2="12" y2="15"/>
+      <div class="tile-icon-wrap bg-green">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+          <polyline points="17 8 12 3 7 8"/>
+          <line x1="12" y1="3" x2="12" y2="15"/>
+        </svg>
+      </div>
+      <div class="tile-name">CIF Evidence Upload</div>
+      <div class="tile-desc">Secure document upload portal for academy trusts to submit supporting evidence for CIF applications directly to Warneford Consulting.</div>
+      <div class="tile-footer">
+        <span class="tile-tag">CIF</span>
+        <div class="tile-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
           </svg>
         </div>
-        <div class="tile-name">CIF Evidence Upload</div>
       </div>
-      <div class="tile-desc">Secure document upload portal for academy trusts to submit supporting evidence for CIF applications to Warneford Consulting.</div>
-      <div class="tile-arrow">Open portal ›</div>
     </a>
 
+    <!-- Academy Intelligence Portal -->
     <a class="tile" href="https://academy-trust-intelligence.pages.dev" target="_blank" rel="noopener">
-      <div class="tile-header">
-        <div class="tile-icon icon-purple">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"/>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      <div class="tile-icon-wrap bg-purple">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </div>
+      <div class="tile-name">Academy Intelligence Portal</div>
+      <div class="tile-desc">Comprehensive data on all 2,089 English academy trusts — 12 years of CIF history, SCA allocations, school data, and engagement opportunity scoring.</div>
+      <div class="tile-footer">
+        <span class="tile-tag">Intelligence</span>
+        <div class="tile-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
           </svg>
         </div>
-        <div class="tile-name">Academy Intelligence Portal</div>
       </div>
-      <div class="tile-desc">Comprehensive intelligence on all 2,089 English academy trusts — CIF and SCA funding history, school data, and engagement opportunity scoring.</div>
-      <div class="tile-arrow">Open portal ›</div>
     </a>
 
+    <!-- DEC Finder -->
     <a class="tile" href="https://dec-finder.pages.dev" target="_blank" rel="noopener">
-      <div class="tile-header">
-        <div class="tile-icon icon-amber">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
-            <polyline points="9 22 9 12 15 12 15 22"/>
+      <div class="tile-icon-wrap bg-amber">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+      </div>
+      <div class="tile-name">DEC Finder</div>
+      <div class="tile-desc">Search and view Display Energy Certificates for public buildings, helping trusts understand their estate's energy performance and compliance position.</div>
+      <div class="tile-footer">
+        <span class="tile-tag">Energy</span>
+        <div class="tile-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
           </svg>
         </div>
-        <div class="tile-name">DEC Finder</div>
       </div>
-      <div class="tile-desc">Search and view Display Energy Certificates for public buildings, helping trusts understand their estate's energy performance ratings.</div>
-      <div class="tile-arrow">Open portal ›</div>
     </a>
 
+    <!-- GEMZ Upload Portal -->
     <a class="tile" href="https://gemz-data-portal.pages.dev" target="_blank" rel="noopener">
-      <div class="tile-header">
-        <div class="tile-icon icon-teal">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <ellipse cx="12" cy="5" rx="9" ry="3"/>
-            <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
-            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+      <div class="tile-icon-wrap bg-teal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <ellipse cx="12" cy="5" rx="9" ry="3"/>
+          <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+          <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+        </svg>
+      </div>
+      <div class="tile-name">GEMZ Upload Portal</div>
+      <div class="tile-desc">Upload and manage data files for the GEMZ platform, enabling seamless data ingestion and processing for energy and asset management workflows.</div>
+      <div class="tile-footer">
+        <span class="tile-tag">Data</span>
+        <div class="tile-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
           </svg>
         </div>
-        <div class="tile-name">GEMZ Upload Portal</div>
       </div>
-      <div class="tile-desc">Upload and manage data files for the GEMZ platform, enabling seamless data ingestion and processing for energy and asset management.</div>
-      <div class="tile-arrow">Open portal ›</div>
     </a>
 
   </div>
 </main>
 
+<!-- ── Footer ── -->
 <footer>
-  Warneford Consulting &copy; 2026
+  <p>&copy; 2026 Warneford Consulting Ltd. For internal use only.</p>
+  <a href="mailto:james@warnefordconsulting.com">james@warnefordconsulting.com</a>
 </footer>
 
 </body>
