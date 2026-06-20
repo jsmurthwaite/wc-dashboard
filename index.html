@@ -43,40 +43,6 @@
       border-bottom: 1px solid var(--border);
     }
 
-    /* slim utility bar */
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 56px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .topbar-left {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      color: var(--muted);
-      font-weight: 500;
-    }
-
-    .topbar-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: #22c55e;
-      box-shadow: 0 0 0 2px rgba(34,197,94,0.2);
-    }
-
-    .topbar-badge {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--red);
-      background: var(--red-soft);
-      padding: 3px 10px;
-      border-radius: 20px;
-      letter-spacing: 0.04em;
-    }
 
     /* main hero content */
     .hero {
@@ -130,39 +96,6 @@
       font-weight: 400;
     }
 
-    .hero-stats {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-      margin-top: 32px;
-    }
-
-    .stat {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .stat-num {
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--navy);
-      letter-spacing: -0.02em;
-      line-height: 1;
-    }
-
-    .stat-label {
-      font-size: 11px;
-      color: var(--muted);
-      font-weight: 500;
-      letter-spacing: 0.02em;
-    }
-
-    .stat-divider {
-      width: 1px;
-      height: 32px;
-      background: var(--border);
-    }
 
     /* ─────────────────────────────
        SECTION LABEL
@@ -382,15 +315,6 @@
 ═══════════════════════════════════ -->
 <div class="hero-wrap">
 
-  <!-- utility bar -->
-  <div class="topbar">
-    <div class="topbar-left">
-      <span class="topbar-dot"></span>
-      All systems operational
-    </div>
-    <span class="topbar-badge">Internal Access</span>
-  </div>
-
   <!-- logo + title -->
   <div class="hero">
     <div class="hero-logo">
@@ -400,25 +324,8 @@
     <div class="hero-divider"></div>
 
     <div class="hero-text">
-      <div class="hero-eyebrow">Tools &amp; Portals</div>
-      <h1 class="hero-title">Your central hub</h1>
-      <p class="hero-sub">Access all Warneford Consulting's client portals and internal intelligence tools from one place.</p>
-      <div class="hero-stats">
-        <div class="stat">
-          <span class="stat-num">5</span>
-          <span class="stat-label">Active portals</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat">
-          <span class="stat-num">2,089</span>
-          <span class="stat-label">Trusts tracked</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat">
-          <span class="stat-num">12yrs</span>
-          <span class="stat-label">CIF data</span>
-        </div>
-      </div>
+      <h1 class="hero-title">Tools &amp; Portals</h1>
+      <p class="hero-sub">One place to access all Warneford Consulting's client portals and internal intelligence tools.</p>
     </div>
   </div>
 
